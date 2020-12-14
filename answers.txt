@@ -7,3 +7,25 @@ db.bounties.find({},{"name":1})
 
 db.bounties.remove({name: 'Starbuck'})
 db.bounties.remove({_id : ObjectId("5fd7a339a7684255723dd0fe")})
+
+
+
+db.bounties.find({reward: {$gt: 100000 } } )
+db.bounties.find({reward: {$lt: 1000 } } )
+db.bounties.find({reward: {$lte: 1000 } } )
+
+db.bounties.find({hunters: 'Nebula'})
+
+db.bounties.find({$or: [ {ship: 'Waverider'}, {ship: 'Serenity'}]})
+db.bounties.find({ $and: [ {captured: false}, {client: 'Ayesha High Priestess of the Sovereign'}]})
+db.bounties.updateMany({}, {$inc:{reward: 333333}})
+db.bounties.updateMany({}, {$mul:{reward: 2}})
+
+
+db.bounties.update({name:'Malcom Reynolds'},{$push:{hunters:'Bobba Fett'}})
+db.bounties.update({ship:'Waverider'},{$push:{hunters:'Bobba Fett'}})
+
+
+db.bounties.update({hunters: 'Dengar'}, {$pull:{hunters: 'Dengar'}})
+db.bounties.update({name:'Han Solo'},{$set:{lastseen:'yesterday'}},{upsert:true})
+db.bounties.updateMany({name: {$ne: 'Han Solo'}},{$set:{lastseen:'last week'}},{upsert:true})
